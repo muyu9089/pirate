@@ -48,8 +48,8 @@ class UserSpider:
                 if table:
 
                     table_head_list = self.get_table_head(table)
-                    table_body_list = self.get_table_body(table)
-                    self.build_dataframe(table_head_list, table_body_list)
+                    table_body_lists = self.get_table_body(table)
+                    self.build_dataframe(table_head_list, table_body_lists)
 
     def get_table_head(self, table):
         """
@@ -68,22 +68,27 @@ class UserSpider:
         @note: 获取持仓情况表主体内容
         @return: List
         """
-
+        table_body_lists = []
         tbody = table.find("tbody")
         if tbody:
             for tr in tbody.find_all('tr'):
-                table_body_list = [table_body.text for table_body in tr.find_all('td') if table_body.text != ' 买 卖']
-                return table_body_list
+                table_body_list = []
+                for table_body in tr.find_all('td'):
+                    if table_body.text != ' 买 卖':
+                        table_body_list.append(table_body.text)
+                table_body_lists.append(table_body_list)
 
-    # def build_dataframe(self, table_head_list, table_body_list):
-    #     """
-    #
-    #     @param table_head_list: 持仓情况表头内容列表
-    #     @param table_body_list: 持仓情况表内容列表
-    #     @return: DataFrame
-    #     """
-    #     stock_df = pd.DataFrame(table_body_list, columns=table_head_list)
-    #     print(stock_df)
+        return table_body_lists
+
+    def build_dataframe(self, table_head_list, table_body_list):
+        """
+
+        @param table_head_list: 持仓情况表头内容列表
+        @param table_body_list: 持仓情况表内容列表
+        @return: DataFrame
+        """
+        stock_df = pd.DataFrame(table_body_list, columns=table_head_list)
+        print(stock_df)
 
 
 if __name__ == "__main__":
