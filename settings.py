@@ -9,7 +9,7 @@ class Settings:
 
     def __init__(self):
 
-        self.login_url = "https://passport2.eastmoney.com/pub/login?backurl=https%3A//quote.eastmoney.com/center/gridlist.html%23hs_a_board"
+        self.login_url = "https://jywg.18.cn/Login?el=1&clear=&returl=%2fTrade%2fBuy"
 
     def get_login_url(self):
         """
