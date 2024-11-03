@@ -9,7 +9,7 @@ class Settings:
 
     def __init__(self):
 
-        self.login_url = "https://jywg.18.cn/Login?el=1&clear=&returl=%2fTrade%2fBuy"
+        self.login_url = "https://jywg.18.cn/Login?el=1&clear=1"
 
     def get_login_url(self):
         """
