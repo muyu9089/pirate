@@ -41,7 +41,7 @@ class UserSpider:
         driver_edge.get(self.url)
         driver_edge.execute_script("alert('请先登陆账户');")
         WebDriverWait(driver_edge, 10).until(EC.alert_is_present())  # 等待 alert 出现，最多等10秒
-        time.sleep(10)
+        time.sleep(3)
         # 切换到 alert 对象，并点击“确定”
         alert = Alert(driver_edge)
         alert.accept()  # 点击弹窗的确定按钮
